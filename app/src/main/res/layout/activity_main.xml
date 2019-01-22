@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LynerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <!-- XML file that applies the style to the TextView (saved in res/layout) -->
-<TextView
-    android:layout_height="wrap_content"
-    android:layout_width="fill_parent"
-    android:width="359.5dp"
-    android:height="118dp"
-    android:text="SafePass"
-    android:style="@style/"/>
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:width="359.5dp"
+        android:height="118dp"
+        android:text="@string/safepass"
+        style="@style/Brown"
+    />
 
 </LynerLayout>

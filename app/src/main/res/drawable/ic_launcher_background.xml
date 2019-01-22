@@ -168,19 +168,4 @@
         android:strokeWidth="0.8"
         android:strokeColor="#33FFFFFF" />
 
-
-<!-- XML file for the shape (saved in res/drawable) -->
-<shape
-    android:shape="rectangle"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="540dp"
-    android:height="960dp"/>
-
-<!-- XML file for the shape (saved in res/drawable) -->
-<shape
-    android:shape="rectangle"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="247dp"
-    android:height="247dp"/>
-
 </vector>
