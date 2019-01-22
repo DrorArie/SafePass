@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LynerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="horizontal">
 
     <!-- XML file that applies the style to the TextView (saved in res/layout) -->
     <TextView
@@ -15,4 +17,20 @@
         style="@style/Brown"
     />
 
-</LynerLayout>
+    <ImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lock_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/safe_box"
+        android:contentDescription="@string/todo" />
+
+    <ImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/open_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/open_screen"
+        android:contentDescription="@string/sss" />
+
+</LinearLayout>
