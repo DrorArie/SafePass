@@ -9,7 +9,7 @@
     </style>
 
     <!-- XML file for the style (saved in res/values/) -->
-    <style name="Brown">
+    <style name="title">
         <item name="android:fontFamily">@font/knewave</item>
         <item name="android:textColor">#FFB8977E</item>
         <item name="android:textSize">80sp</item>
