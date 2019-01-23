@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="horizontal">
+    android:background="@drawable/open_background_picture"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
 
     <!-- XML file that applies the style to the TextView (saved in res/layout) -->
     <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
         android:width="359.5dp"
         android:height="118dp"
-        android:text="@string/safepass"
         style="@style/Brown"
-    />
+        android:text="@string/safepass"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="172dp" />
 
-    <ImageView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/lock_box"
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/safe_box"
-        android:contentDescription="@string/todo" />
+        android:background="@drawable/safe_box_picture"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="290dp"
+        tools:ignore="MissingConstraints"
+        android:contentDescription="@string/safe_box" />
 
-    <ImageView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/open_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/open_screen"
-        android:contentDescription="@string/sss" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

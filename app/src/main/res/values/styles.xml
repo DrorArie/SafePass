@@ -10,7 +10,7 @@
 
     <!-- XML file for the style (saved in res/values/) -->
     <style name="Brown">
-        <item name="android:fontFamily">Knewave</item>
+        <item name="android:fontFamily">@font/knewave</item>
         <item name="android:textColor">#FFB8977E</item>
         <item name="android:textSize">80sp</item>
         <item name="android:lineSpacingMultiplier">1.3</item>
