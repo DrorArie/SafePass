@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/open_background_picture"
@@ -17,7 +16,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="207dp"
         android:layout_marginEnd="36dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="2dp"
         android:width="359.5dp"
         android:height="118dp"
         android:text="@string/safepass"
