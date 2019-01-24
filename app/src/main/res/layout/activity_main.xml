@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/open_background_picture"
-    android:orientation="horizontal"
+    android:orientation=""
 
     >
     <!-- XML file that applies the style to the TextView (saved in res/layout) -->
