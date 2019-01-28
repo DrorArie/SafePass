@@ -2,5 +2,6 @@
     <string name="app_name">SafePass</string>
     <string name="safepass">SafePass</string>
     <string name="safe_box">safe box</string>
+    <string name="hello">hello</string>
 
 </resources>
