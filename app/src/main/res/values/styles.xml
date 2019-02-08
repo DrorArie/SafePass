@@ -2,7 +2,6 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -12,7 +11,7 @@
     <style name="title">
         <item name="android:fontFamily">@font/iceberg</item>
         <item name="android:textColor">#FFB8977E</item>
-        <item name="android:textSize">80sp</item>
+        <item name="android:textSize">100sp</item>
         <item name="android:lineSpacingMultiplier">1.3</item>
     </style>
 </resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "219411056498",
+    "firebase_url": "https://safepass.firebaseio.com",
+    "project_id": "safepass",
+    "storage_bucket": "safepass.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219411056498:android:afb26ed19e175f97",
+        "android_client_info": {
+          "package_name": "com.dror.safepass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219411056498-iao5fusrm72ub4oshfuh5jbc9kmmq8q1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dror.safepass",
+            "certificate_hash": "51c06b155113a27dfd7fed87e1198ed11948e18e"
+          }
+        },
+        {
+          "client_id": "219411056498-ok9b4e6028jrtcqvhqjdacquqtvmjf7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxxSf67HFgSGq1rYIojpcWs_MfIjOy0Mo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "219411056498-ok9b4e6028jrtcqvhqjdacquqtvmjf7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
