@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">SafePass</string>
-    <string name="safepass">SafePass</string>
-    <string name="safe_box">safe box</string>
     <string name="hello">hello</string>
+    <string name="todo">TODO</string>
+    <string name="safepass">SafePass</string>
+    <string name="please_your_password_or_fingerprint">Please your password or fingerprint</string>
+    <string name="don_t_have_account_sign_up">Don\'t have account? Sign up</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 
 </resources>
