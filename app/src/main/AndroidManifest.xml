@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".FingerPrint" />
         <activity android:name=".Splash">
             <intent-filter>
