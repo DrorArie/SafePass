@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">SafePass</string>
     <string name="hello">hello</string>
-    <string name="todo">TODO</string>
     <string name="safepass">SafePass</string>
-    <string name="please_your_password_or_fingerprint">Please your password or fingerprint</string>
     <string name="don_t_have_account_sign_up">Don\'t have account? Sign up</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="todo">TODO</string>
+    <string name="please_enter_password_or_fingerprint">Please enter password or fingerprint</string>
+    <string name="please_enter_your_email_and_a_password">Please enter your email and a password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
 
 </resources>
