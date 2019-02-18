@@ -33,6 +33,7 @@
         android:id="@+id/fingerPrint"
         android:layout_width="130dp"
         android:layout_height="130dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/finger_print"
         android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +46,6 @@
         style="@style/EnterPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="@string/please_enter_your_email_and_a_password"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,6 @@
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/password"
         android:importantForAutofill="no"
@@ -73,7 +72,6 @@
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/email"
         android:importantForAutofill="no"
@@ -96,11 +94,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SignIn"
+        app:layout_constraintTop_toBottomOf="@+id/Login"
         tools:targetApi="p" />
 
     <Button
-        android:id="@+id/SignIn"
+        android:id="@+id/Login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
@@ -108,5 +106,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@+id/Login"
+        app:layout_constraintTop_toTopOf="@+id/Login" />
 
 </android.support.constraint.ConstraintLayout>
