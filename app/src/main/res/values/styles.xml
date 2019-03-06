@@ -28,11 +28,4 @@
         <item name="android:textSize">45sp</item>
         <item name="android:lineSpacingMultiplier">1.3</item>
     </style>
-    <!-- XML file for the style (saved in res/values/) -->
-    <style name="suc_title">
-        <item name="android:fontFamily">Knewave</item>
-        <item name="android:textColor">#FFB8977E</item>
-        <item name="android:textSize">39.5sp</item>
-        <item name="android:lineSpacingMultiplier">1.29</item>
-    </style>
 </resources>

@@ -8,9 +8,11 @@
     <string name="login">Login</string>
     <string name="todo">TODO</string>
     <string name="please_enter_password_or_fingerprint">Please enter password or fingerprint</string>
-    <string name="please_enter_your_email_and_a_password">Please enter your email and a password</string>
+    <string name="please_enter_your_email_and_password">Please enter your email and password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
-    <string name="already_have_an_account_login">Already have an account? Login</string>
+    <string name="Have_an_account_login">Have an account? Login</string>
+    <string name="name">Name</string>
+    <string name="your_passwords">Your Passwords</string>
 
 </resources>

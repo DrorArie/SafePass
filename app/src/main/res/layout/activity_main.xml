@@ -5,18 +5,130 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_list"
+    android:background="@drawable/watch_tower"
     tools:context=".MainActivity">
 
     <View
         android:id="@+id/myRectangleView"
-        android:layout_width="420dp"
-        android:layout_height="78dp"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
         android:background="@drawable/main_activity_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:text="@string/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myRectangleView"
+        tools:ignore="LabelFor"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="306dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:width="525dp"
+        android:height="97.5dp"
+        android:fontFamily="@font/chewy"
+        android:text="@string/your_passwords"
+        android:textAlignment="textStart"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/myRectangleView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="9dp"
+        android:layout_marginBottom="8dp"
+        android:layerType="software"
+        android:src="@drawable/divided_line"
+        app:layout_constraintBottom_toTopOf="@+id/edit"
+        tools:ignore="ContentDescription"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layerType="software"
+        android:src="@drawable/safe_box_picture"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/add"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/add"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/edit"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/edit"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/edit"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="@+id/add"
+        app:layout_constraintEnd_toStartOf="@+id/delete"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/add" />
+
+    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/delete"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/remove"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="@+id/edit"
+        app:layout_constraintEnd_toStartOf="@+id/button_save"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/edit" />
+
+    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/button_save"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/save"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="@+id/delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/delete" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
 
 </android.support.constraint.ConstraintLayout>
