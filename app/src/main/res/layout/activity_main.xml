@@ -5,16 +5,16 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/watch_tower"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <View
         android:id="@+id/myRectangleView"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="70dp"
         android:background="@drawable/main_activity_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,17 +36,17 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="306dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="323dp"
+        android:layout_height="wrap_content"
         android:width="525dp"
         android:height="97.5dp"
         android:fontFamily="@font/chewy"
         android:text="@string/your_passwords"
         android:textAlignment="textStart"
         android:textSize="50sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/logo"
+        app:layout_constraintEnd_toStartOf="@+id/logo"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/myRectangleView" />
 
@@ -63,20 +63,21 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layerType="software"
         android:src="@drawable/safe_box_picture"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        tools:layout_editor_absoluteY="332dp" />
 
     <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/add"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/add"
         android:contentDescription="@string/todo"
@@ -87,8 +88,8 @@
 
     <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/edit"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/edit"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="@+id/add"
@@ -98,8 +99,8 @@
 
     <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/delete"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/remove"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="@+id/edit"
@@ -109,8 +110,8 @@
 
     <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/button_save"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/save"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="@+id/delete"

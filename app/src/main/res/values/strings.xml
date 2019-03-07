@@ -14,5 +14,6 @@
     <string name="Have_an_account_login">Have an account? Login</string>
     <string name="name">Name</string>
     <string name="your_passwords">Your Passwords</string>
+    <string name="you_can_use_your_fingerprint_too_for_getting_access">You can use your fingerprint too for getting access</string>
 
 </resources>

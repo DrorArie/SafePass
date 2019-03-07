@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "219411056498-hap08uftf189fpuh2b5a5lpnqh6geifa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dror.safepass",
+            "certificate_hash": "3d087107cfb3d97c9e6e2ecfdedf3d1e0837e00b"
+          }
+        },
+        {
           "client_id": "219411056498-ok9b4e6028jrtcqvhqjdacquqtvmjf7i.apps.googleusercontent.com",
           "client_type": 3
         }
