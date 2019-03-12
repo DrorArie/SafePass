@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -19,6 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,10 +40,20 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        editText = findViewById(R.id.editText);
         progressBar = findViewById(R.id.progressBar);
+
+        ImageButton add = (ImageButton) findViewById(R.id.add);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Pop.class));
+            }
+        });
+
+
 
         loadUserInformation();
 
@@ -65,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadUserInformation() {
         FirebaseUser user = mAuth.getCurrentUser();
 
+        assert user != null;
         if(user.getDisplayName() != null) {
             editText.setText(user.getDisplayName());
         }
