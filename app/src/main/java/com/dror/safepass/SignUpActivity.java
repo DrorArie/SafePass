@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -83,9 +84,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
-                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    user.sendEmailVerification();
+                    Toast.makeText(SignUpActivity.this, "Verification email sent", Toast.LENGTH_SHORT ).show();
+                    finish();
+                    startActivity(new Intent(SignUpActivity.this, FingerPrint.class));
+
                 }else{
                     if(task.getException() instanceof FirebaseAuthInvalidUserException){
                         Toast.makeText(getApplicationContext(), "You are already registered", Toast.LENGTH_SHORT).show();
@@ -106,6 +110,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.loginScreen:
+                finish();
                 startActivity(new Intent(this, FingerPrint.class));
                 break;
 

@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class FingerPrint extends AppCompatActivity  implements View.OnClickListener {
 
@@ -69,9 +70,16 @@ public class FingerPrint extends AppCompatActivity  implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
-                    Intent intent = new Intent(FingerPrint.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    if(user.isEmailVerified()){
+                        finish();
+                        Intent intent = new Intent(FingerPrint.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+
+                    }else{
+                        Toast.makeText(FingerPrint.this, "Email not verified", Toast.LENGTH_SHORT).show();
+                    }
                 }else{
                     Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -81,10 +89,12 @@ public class FingerPrint extends AppCompatActivity  implements View.OnClickListe
 
 
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case  R.id.SignUp:
+                finish();
                 startActivity(new Intent(this, SignUpActivity.class ));
                 break;
 
