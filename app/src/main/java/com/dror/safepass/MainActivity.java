@@ -27,8 +27,6 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     EditText editText;
-    ProgressBar progressBar;
-
     FirebaseAuth mAuth;
 
     @Override
@@ -42,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        progressBar = findViewById(R.id.progressBar);
 
         ImageButton add = (ImageButton) findViewById(R.id.add);
 
@@ -53,14 +50,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-        loadUserInformation();
-
         findViewById(R.id.button_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveUserInformation();
             }
         });
     }
@@ -74,48 +66,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
         }
 
-    }
-
-    private void loadUserInformation() {
-        FirebaseUser user = mAuth.getCurrentUser();
-
-        assert user != null;
-        if(user.getDisplayName() != null) {
-            editText.setText(user.getDisplayName());
-        }
-
-
-
-    }
-
-    private void saveUserInformation() {
-        String displayName = editText.getText().toString();
-        progressBar.setVisibility(View.VISIBLE);
-
-        if(displayName.isEmpty()){
-            editText.setError("Name required");
-            editText.requestFocus();
-            return;
-        }
-
-        FirebaseUser user = mAuth.getCurrentUser();
-
-        if(user != null){
-            UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(displayName).build();
-
-            user.updateProfile(profile)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            progressBar.setVisibility(View.GONE);
-                            if(task.isSuccessful()){
-                                Toast.makeText(MainActivity.this, "Name Updated", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-        }
 
 
     }
