@@ -6,36 +6,39 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor">
 
-    <EditText
-        android:id="@+id/editText"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/platformName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/userName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:met_floatingLabel="highlight"
+        app:met_singleLineEllipsis="true" />
 
-    <EditText
-        android:id="@+id/editText2"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="User Name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/platformName"
+        app:met_floatingLabel="highlight"
+        app:met_singleLineEllipsis="true" />
 
-    <EditText
-        android:id="@+id/editText3"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -45,20 +48,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:met_floatingLabel="highlight"
+        app:met_singleLineEllipsis="true" />
 
-    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/add"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/add"
+    <android.support.design.widget.FloatingActionButton xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/todo"
+        android:src="@drawable/ic_add_black_24dp"
+        app:backgroundTint="@color/colorAccent"
+        app:elevation="6dp"
+        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="@color/common_google_signin_btn_text_dark"
         tools:ignore="MissingConstraints" />
 
 

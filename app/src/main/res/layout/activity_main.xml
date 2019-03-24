@@ -81,9 +81,10 @@
         android:id="@+id/edit"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/edit"
         android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toBottomOf="@+id/add"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/delete"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/add" />
@@ -92,31 +93,33 @@
         android:id="@+id/delete"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/remove"
         android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toBottomOf="@+id/edit"
-        app:layout_constraintEnd_toStartOf="@+id/button_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/save"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/edit" />
 
     <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/button_save"
+        android:id="@+id/save"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/save"
         android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toBottomOf="@+id/delete"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/delete" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="562dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listPasswords"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="65dp"
+        android:layout_marginBottom="85dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/recycler_view_item" />
 
 </android.support.constraint.ConstraintLayout>

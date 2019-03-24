@@ -2,15 +2,65 @@ package com.dror.safepass;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.Toast;
+import com.dror.safepass.MainActivity;
 
-class Pop extends Activity {
+import com.dror.safepass.Model.ToDo;
+import com.dror.safepass.adapter.ListItemAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.rengwuxian.materialedittext.MaterialEditText;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
+
+public class Pop extends Activity{
+
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.popwindow);
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.popwindow);
+        MainActivity.db = FirebaseFirestore.getInstance();
+
+        fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!MainActivity.isUpdate)
+                    {
+                    Toast.makeText(Pop.this, "added!", Toast.LENGTH_SHORT).show();
+                    setData(MainActivity.title.getText().toString(),MainActivity.userName.getText().toString(),MainActivity.password.getText().toString());
+                }
+                else
+                {
+                    Toast.makeText(Pop.this, "Updated!", Toast.LENGTH_SHORT).show();
+                    updateData(MainActivity.title.getText().toString(),MainActivity.userName.getText().toString(), MainActivity.password.getText().toString());
+                    MainActivity.isUpdate = !MainActivity.isUpdate;
+                }
+            }
+        });
 
         DisplayMetrics dm = new DisplayMetrics();
 
@@ -22,4 +72,41 @@ class Pop extends Activity {
         getWindow().setLayout((int)(width *.8) , (int)(height*.6));
 
     }
+
+    private void updateData(String title, String userName, String password) {
+        MainActivity.db.collection("passwordsList").document(MainActivity.idUpdate)
+                .update("title", title, "User Name", userName, "password", password)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Pop.this, "Updated!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                });
+
+        MainActivity.db.collection("passwordsList").document(MainActivity.idUpdate)
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                    }
+                });
+    }
+
+    private void setData(String title, String userName, String password) {
+        String id = UUID.randomUUID().toString();
+        Map<String, Object> todo = new HashMap<>();
+        todo.put("id", id);
+        todo.put("title", title);
+        todo.put("userName", userName);
+        todo.put("password", password);
+
+        MainActivity.db.collection("passwordsList").document(id)
+                .set(todo).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                finish();
+            }
+        });
+    }
+
 }
