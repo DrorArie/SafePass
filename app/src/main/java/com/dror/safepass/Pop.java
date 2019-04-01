@@ -1,6 +1,7 @@
 package com.dror.safepass;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -37,11 +38,24 @@ public class Pop extends Activity{
 
     FloatingActionButton fab;
 
+    public static MaterialEditText title, userName, password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.popwindow);
         super.onCreate(savedInstanceState);
 
+        title = (MaterialEditText) findViewById(R.id.platformName);
+        userName = (MaterialEditText) findViewById(R.id.userName);
+        password = (MaterialEditText) findViewById(R.id.password);
+
+        int position = getIntent().getIntExtra("position", 0);
+
+        Pop.title.setText(MainActivity.passwordList.get(position).getTitle());
+        Pop.userName.setText(MainActivity.passwordList.get(position).getUserName());
+        Pop.password.setText(MainActivity.passwordList.get(position).getPassword());
+
+        Toast.makeText(Pop.this, title.getText(), Toast.LENGTH_SHORT).show();
         MainActivity.db = FirebaseFirestore.getInstance();
 
         fab = (FloatingActionButton)findViewById(R.id.fab);
@@ -51,12 +65,12 @@ public class Pop extends Activity{
                 if(!MainActivity.isUpdate)
                     {
                     Toast.makeText(Pop.this, "added!", Toast.LENGTH_SHORT).show();
-                    setData(MainActivity.title.getText().toString(),MainActivity.userName.getText().toString(),MainActivity.password.getText().toString());
+                    setData(title.getText().toString(),userName.getText().toString(),password.getText().toString());
                 }
                 else
                 {
                     Toast.makeText(Pop.this, "Updated!", Toast.LENGTH_SHORT).show();
-                    updateData(MainActivity.title.getText().toString(),MainActivity.userName.getText().toString(), MainActivity.password.getText().toString());
+                    updateData(title.getText().toString(),userName.getText().toString(), password.getText().toString());
                     MainActivity.isUpdate = !MainActivity.isUpdate;
                 }
             }
@@ -75,7 +89,7 @@ public class Pop extends Activity{
 
     private void updateData(String title, String userName, String password) {
         MainActivity.db.collection("passwordsList").document(MainActivity.idUpdate)
-                .update("title", title, "User Name", userName, "password", password)
+                .update("title", title, "userName", userName, "password", password)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

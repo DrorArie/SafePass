@@ -1,6 +1,10 @@
 package com.dror.safepass.adapter;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcelable;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -9,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dror.safepass.MainActivity;
 import com.dror.safepass.Pop;
@@ -18,6 +23,8 @@ import com.dror.safepass.Splash;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.io.Console;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 class ListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
@@ -59,6 +66,7 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
 
     MainActivity mainActivity;
     List<ToDo> passwordList;
+    private Handler mHandler = new Handler();
 
     public ListItemAdapter(MainActivity mainActivity, List<ToDo> passwordList) {
         this.mainActivity = mainActivity;
@@ -82,16 +90,20 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLondClick) {
-                MainActivity.title.setText(passwordList.get(position).getTitle());
-                MainActivity.userName.setText(passwordList.get(position).getUserName());
-                MainActivity.password.setText(passwordList.get(position).getPassword());
-                mainActivity.startActivity(new Intent(mainActivity,Pop.class));
 
                 MainActivity.isUpdate = true;
                 MainActivity.idUpdate = passwordList.get(position).getId();
+                Intent intent = new Intent(mainActivity, Pop.class);
+                intent.putExtra("position", position);
+                mainActivity.startActivityForResult(intent, 1);
             }
         });
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mainActivity.onActivityResult(requestCode, resultCode, data);
+        mainActivity.loadData();}
+
 
     @Override
     public int getItemCount() {

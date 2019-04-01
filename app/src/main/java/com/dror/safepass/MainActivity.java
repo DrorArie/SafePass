@@ -52,7 +52,7 @@ import dmax.dialog.SpotsDialog;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<ToDo> passwordList = new ArrayList<>();
+    public static List<ToDo> passwordList = new ArrayList<>();
     public static FirebaseFirestore db;
 
     public static RecyclerView listItem;
@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
     static AlertDialog dialog;
 
     FirebaseAuth mAuth;
-
-    public static MaterialEditText title, userName, password;
 
     public static boolean isUpdate =false;
     public static String idUpdate = "";
@@ -78,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
 
         final View view = factory.inflate(R.layout.popwindow, null);
 
-        title = (MaterialEditText) view.findViewById(R.id.platformName);
-        userName = (MaterialEditText) view.findViewById(R.id.userName);
-        password = (MaterialEditText) view.findViewById(R.id.password);
+        Pop.title = (MaterialEditText) view.findViewById(R.id.platformName);
+        Pop.userName = (MaterialEditText) view.findViewById(R.id.userName);
+        Pop.password = (MaterialEditText) view.findViewById(R.id.password);
 
         db = FirebaseFirestore.getInstance();
 
@@ -91,10 +89,8 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         listItem.setLayoutManager(layoutManager);
 
-
         loadData();
-
-
+        
         mAuth =FirebaseAuth.getInstance();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -114,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         loadData();}
 
@@ -137,40 +133,12 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void updateData(String title, String userName, String password) {
-        db.collection("passwordsList").document(idUpdate)
-                .update("title", title, "User Name", userName, "password", password)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(MainActivity.this, "Updated!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        db.collection("passwordsList").document(idUpdate)
-                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                        loadData();
-                    }
-                });
+    public ArrayList<ToDo> GetPasswordList(){
+        return (ArrayList<ToDo>) this.passwordList;
     }
 
-    private void setData(String title, String userName, String password) {
-        String id = UUID.randomUUID().toString();
-        Map<String, Object> todo = new HashMap<>();
-        todo.put("id", id);
-        todo.put("title", title);
-        todo.put("userName", userName);
-        todo.put("password", password);
-
-        db.collection("passwordsList").document(id)
-                .set(todo).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                loadData();
-            }
-        });
+    public FirebaseFirestore GetDB(){
+        return this.db;
     }
 
 
