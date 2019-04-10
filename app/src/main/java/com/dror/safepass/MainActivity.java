@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
         listItem.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         listItem.setLayoutManager(layoutManager);
-
-        loadData();
         
         mAuth =FirebaseAuth.getInstance();
+
+        loadData();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -146,8 +146,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
         if(passwordList.size() > 0)
             passwordList.clear();
-        db.collection("passwordsList")
-                .get()
+        db.collection("passwordsList").whereEqualTo("User_id", mAuth.getCurrentUser().getUid()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
