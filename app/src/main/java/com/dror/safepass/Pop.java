@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,12 +34,13 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
-
 public class Pop extends Activity{
+
+    FirebaseAuth mAuth;
 
     FloatingActionButton fab;
 
-    public static MaterialEditText title, userName, password;
+    public MaterialEditText title, userName, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +53,15 @@ public class Pop extends Activity{
 
         int position = getIntent().getIntExtra("position", 0);
 
-        Pop.title.setText(MainActivity.passwordList.get(position).getTitle());
-        Pop.userName.setText(MainActivity.passwordList.get(position).getUserName());
-        Pop.password.setText(MainActivity.passwordList.get(position).getPassword());
+        boolean add = getIntent().getBooleanExtra("add", false);
+
+        mAuth =FirebaseAuth.getInstance();
+
+        if(!add) {
+            title.setText(MainActivity.passwordList.get(position).getTitle());
+            userName.setText(MainActivity.passwordList.get(position).getUserName());
+            password.setText(MainActivity.passwordList.get(position).getPassword());
+        }
 
         Toast.makeText(Pop.this, title.getText(), Toast.LENGTH_SHORT).show();
         MainActivity.db = FirebaseFirestore.getInstance();
@@ -89,7 +97,7 @@ public class Pop extends Activity{
 
     private void updateData(String title, String userName, String password) {
         MainActivity.db.collection("passwordsList").document(MainActivity.idUpdate)
-                .update("title", title, "userName", userName, "password", password)
+                .update("title", "Title: " + title, "userName","User Name: "  + userName, "password", "Password: " + password)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -109,10 +117,11 @@ public class Pop extends Activity{
     private void setData(String title, String userName, String password) {
         String id = UUID.randomUUID().toString();
         Map<String, Object> todo = new HashMap<>();
+        todo.put("User_id", mAuth.getCurrentUser().getUid());
         todo.put("id", id);
-        todo.put("title", title);
-        todo.put("userName", userName);
-        todo.put("password", password);
+        todo.put("title", "Title: " + title);
+        todo.put("userName","User Name: "  + userName);
+        todo.put("password", "Password: " + password);
 
         MainActivity.db.collection("passwordsList").document(id)
                 .set(todo).addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -66,7 +66,6 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
 
     MainActivity mainActivity;
     List<ToDo> passwordList;
-    private Handler mHandler = new Handler();
 
     public ListItemAdapter(MainActivity mainActivity, List<ToDo> passwordList) {
         this.mainActivity = mainActivity;

@@ -72,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final LayoutInflater factory = getLayoutInflater();
+        /*final LayoutInflater factory = getLayoutInflater();
 
         final View view = factory.inflate(R.layout.popwindow, null);
 
         Pop.title = (MaterialEditText) view.findViewById(R.id.platformName);
         Pop.userName = (MaterialEditText) view.findViewById(R.id.userName);
-        Pop.password = (MaterialEditText) view.findViewById(R.id.password);
+        Pop.password = (MaterialEditText) view.findViewById(R.id.password);*/
 
         db = FirebaseFirestore.getInstance();
 
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         listItem.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         listItem.setLayoutManager(layoutManager);
-        
+
         mAuth =FirebaseAuth.getInstance();
 
         loadData();
@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Pop.class);
+                intent.putExtra("add", true);
                 startActivityForResult(intent, 1);}
 
         });
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                         for (DocumentSnapshot doc:task.getResult())
                         {
                             ToDo toDo = new ToDo(doc.getString("id"),
-                                    doc.getString("title"),
+                                    "Title: " + doc.getString("title"),
                                     doc.getString("userName"),
                                     doc.getString("password"));
                             passwordList.add(toDo);
