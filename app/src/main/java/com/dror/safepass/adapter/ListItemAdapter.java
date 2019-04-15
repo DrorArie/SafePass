@@ -1,6 +1,7 @@
 package com.dror.safepass.adapter;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dror.safepass.Common.Common;
 import com.dror.safepass.MainActivity;
 import com.dror.safepass.Pop;
 import com.dror.safepass.Model.ToDo;
@@ -67,6 +69,8 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
     MainActivity mainActivity;
     List<ToDo> passwordList;
 
+    int row_index = -1; // Default no row choose
+
     public ListItemAdapter(MainActivity mainActivity, List<ToDo> passwordList) {
         this.mainActivity = mainActivity;
         this.passwordList = passwordList;
@@ -89,19 +93,25 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLondClick) {
-
+                row_index = position; // Set row index to selected position
+                Common.curretToDO = passwordList.get(position); // Set curret item is item selection
+                Common.position = position;
+                notifyDataSetChanged(); //made effect on recycleView adapter
+                /*
                 MainActivity.isUpdate = true;
                 MainActivity.idUpdate = passwordList.get(position).getId();
                 Intent intent = new Intent(mainActivity, Pop.class);
                 intent.putExtra("position", position);
-                mainActivity.startActivityForResult(intent, 1);
+                mainActivity.startActivityForResult(intent, 1);*/
             }
         });
-    }
+         if(row_index == position)
+             holder.itemView.setBackgroundColor(Color.parseColor("#949CAA"));
+         else
+             holder.itemView.setBackgroundColor(Color.parseColor("#FF343F4B"));
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mainActivity.onActivityResult(requestCode, resultCode, data);
-        mainActivity.loadData();}
+
+    }
 
 
     @Override

@@ -58,9 +58,12 @@ public class Pop extends Activity{
         mAuth =FirebaseAuth.getInstance();
 
         if(!add) {
-            title.setText(MainActivity.passwordList.get(position).getTitle());
-            userName.setText(MainActivity.passwordList.get(position).getUserName());
-            password.setText(MainActivity.passwordList.get(position).getPassword());
+            title.setText(MainActivity.passwordList.get(position).getTitle()
+                    .substring(MainActivity.passwordList.get(position).getTitle().indexOf(" ") + 1));
+            userName.setText(MainActivity.passwordList.get(position).getUserName()
+                    .substring(MainActivity.passwordList.get(position).getUserName().indexOf(":") + 2));
+            password.setText(MainActivity.passwordList.get(position).getPassword()
+                    .substring(MainActivity.passwordList.get(position).getPassword().indexOf(" ") + 1));
         }
 
         Toast.makeText(Pop.this, title.getText(), Toast.LENGTH_SHORT).show();
@@ -97,7 +100,7 @@ public class Pop extends Activity{
 
     private void updateData(String title, String userName, String password) {
         MainActivity.db.collection("passwordsList").document(MainActivity.idUpdate)
-                .update("title", "Title: " + title, "userName","User Name: "  + userName, "password", "Password: " + password)
+                .update("title",  title, "userName", userName, "password", password)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -119,9 +122,9 @@ public class Pop extends Activity{
         Map<String, Object> todo = new HashMap<>();
         todo.put("User_id", mAuth.getCurrentUser().getUid());
         todo.put("id", id);
-        todo.put("title", "Title: " + title);
-        todo.put("userName","User Name: "  + userName);
-        todo.put("password", "Password: " + password);
+        todo.put("title",title);
+        todo.put("userName",userName);
+        todo.put("password", password);
 
         MainActivity.db.collection("passwordsList").document(id)
                 .set(todo).addOnSuccessListener(new OnSuccessListener<Void>() {

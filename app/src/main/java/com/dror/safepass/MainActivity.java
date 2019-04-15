@@ -1,6 +1,9 @@
 package com.dror.safepass;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
+import com.dror.safepass.Common.Common;
 import com.dror.safepass.Model.ToDo;
 import com.dror.safepass.adapter.ListItemAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -99,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         ImageButton add = (ImageButton) findViewById(R.id.add);
+        ImageButton edit = (ImageButton) findViewById(R.id.edit);
+        ImageButton delete = (ImageButton) findViewById(R.id.delete);
+        ImageButton copy = (ImageButton) findViewById(R.id.copy);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +113,51 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, Pop.class);
                 intent.putExtra("add", true);
                 startActivityForResult(intent, 1);}
+        });
 
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Common.curretToDO != null)
+                {
+                    isUpdate = true;
+                    idUpdate = Common.curretToDO.getId();
+                    Intent intent = new Intent(MainActivity.this, Pop.class);
+                    intent.putExtra("position", Common.position);
+                    startActivityForResult(intent, 1);}
+                else
+                    Toast.makeText(MainActivity.this, "Please choose item", Toast.LENGTH_SHORT ).show();
+                Common.curretToDO = null;
+            }
+        });
+
+        copy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Common.curretToDO != null)
+                {
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip =  ClipData.newPlainText(Common.curretToDO.getUserName(), Common.curretToDO.getUserName().substring(Common.curretToDO.getUserName().indexOf(":") + 2));
+                    clipboard.setPrimaryClip(clip);
+                    clip =  ClipData.newPlainText(Common.curretToDO.getPassword(), Common.curretToDO.getPassword().substring(Common.curretToDO.getPassword().indexOf(" ") + 1));
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(MainActivity.this, "Copied!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(MainActivity.this, "Please choose item", Toast.LENGTH_SHORT).show();
+                Common.curretToDO = null;
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Common.curretToDO != null)
+                    deleteItem(Common.position);
+                else
+                    Toast.makeText(MainActivity.this, "Please choose item", Toast.LENGTH_SHORT).show();
+                Common.curretToDO = null;
+            }
         });
     }
 
@@ -155,8 +206,8 @@ public class MainActivity extends AppCompatActivity {
                         {
                             ToDo toDo = new ToDo(doc.getString("id"),
                                     "Title: " + doc.getString("title"),
-                                    doc.getString("userName"),
-                                    doc.getString("password"));
+                                    "User Name: "  + doc.getString("userName"),
+                                    "Password: " + doc.getString("password"));
                             passwordList.add(toDo);
                         }
                         adapter = new ListItemAdapter(MainActivity.this,  passwordList);

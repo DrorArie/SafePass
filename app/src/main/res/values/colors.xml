@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="mainColor">#B8977E</color>
     <color name="backgroundColor">#FF343F4B</color>
+    <color name="highlight">#949CAA</color>
 </resources>
