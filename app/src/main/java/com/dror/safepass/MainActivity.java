@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                         for (DocumentSnapshot doc:task.getResult())
                         {
                             ToDo toDo = new ToDo(doc.getString("id"),
-                                    "Title: " + doc.getString("title"),
+                                    "Platform: " + doc.getString("title"),
                                     "User Name: "  + doc.getString("userName"),
                                     "Password: " + doc.getString("password"));
                             passwordList.add(toDo);

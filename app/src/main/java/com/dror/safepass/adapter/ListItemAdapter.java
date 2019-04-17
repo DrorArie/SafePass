@@ -32,7 +32,7 @@ import java.util.List;
 class ListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
 
     ItemClickListener itemClickListener;
-    TextView item_title, item_userName, item_password;
+    TextView item_title;
 
 
     public ListItemViewHolder(View itemView) {
@@ -42,9 +42,6 @@ class ListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClick
 
 
         item_title = itemView.findViewById(R.id.item_title);
-        item_userName = itemView.findViewById(R.id.item_user_name);
-        item_password = itemView.findViewById(R.id.item_password);
-
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -87,8 +84,6 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
     public void onBindViewHolder(@NonNull ListItemViewHolder holder, int position) {
 
         holder.item_title.setText(passwordList.get(position).getTitle());
-        holder.item_userName.setText(passwordList.get(position).getUserName());
-        holder.item_password.setText(passwordList.get(position).getPassword());
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
@@ -105,10 +100,10 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
                 mainActivity.startActivityForResult(intent, 1);*/
             }
         });
-         if(row_index == position)
-             holder.itemView.setBackgroundColor(Color.parseColor("#949CAA"));
-         else
-             holder.itemView.setBackgroundColor(Color.parseColor("#FF343F4B"));
+        if(row_index == position)
+            holder.itemView.setBackgroundColor(Color.parseColor("#949CAA"));
+        else
+            holder.itemView.setBackgroundColor(Color.parseColor("#FF343F4B"));
 
 
     }

@@ -9,12 +9,16 @@
 
     <TextView
         android:id="@+id/subTitle"
-        style="@style/sub_title"
+
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/iceberg"
         android:text="@string/safepass"
         android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,27 +29,16 @@
         android:background="@drawable/safe_box_picture"
         android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subTitle" />
-
-    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/fingerPrint"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:background="@drawable/finger_print"
-        android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:fontFamily="@font/chewy"
         android:hint="@string/password"
         android:importantForAutofill="no"
         android:inputType="textPassword"
@@ -62,6 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:fontFamily="@font/chewy"
         android:hint="@string/email"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
@@ -70,31 +64,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/symbol"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
         tools:targetApi="o" />
 
     <Button
         android:id="@+id/SignUp"
-        style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
+        style="@android:style/Widget.Holo.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/chewy"
         android:text="@string/don_t_have_account_sign_up"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Login"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar"
         tools:targetApi="p" />
 
     <Button
         android:id="@+id/Login"
+        style="@android:style/Widget.Material.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:drawableStart="@android:drawable/ic_lock_idle_lock"
+        android:fontFamily="@font/chewy"
         android:text="@string/login"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/SignUp"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,26 +101,28 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:visibility="gone"
-        app:layout_constraintStart_toEndOf="@+id/Login"
-        app:layout_constraintTop_toTopOf="@+id/Login" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="89dp"
-        android:fontFamily="@font/chewy"
-        android:text="@string/you_can_use_your_fingerprint_too_for_getting_access"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/fingerPrint"
+        app:layout_constraintBottom_toTopOf="@+id/SignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/Login" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/chewy"
+        android:text="Please enter email and password"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/symbol" />
 
 </android.support.constraint.ConstraintLayout>
