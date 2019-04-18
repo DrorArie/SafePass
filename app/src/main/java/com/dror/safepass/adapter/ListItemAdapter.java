@@ -2,6 +2,7 @@ package com.dror.safepass.adapter;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -13,6 +14,7 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ import java.util.List;
 class ListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
 
     ItemClickListener itemClickListener;
+    ImageView item_image;
     TextView item_title;
 
 
@@ -42,6 +45,9 @@ class ListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClick
 
 
         item_title = itemView.findViewById(R.id.item_title);
+        item_image = itemView.findViewById(R.id.icon);
+        Typeface font = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/Chewy.ttf");
+        item_title.setTypeface(font);
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -83,9 +89,34 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ListItemViewHolder holder, int position) {
 
-        holder.item_title.setText(passwordList.get(position).getTitle());
+        holder.item_title.setText("  " + passwordList.get(position).getTitle());
+        switch (passwordList.get(position).getTitle()) {
+            case "Facebook":
+                holder.item_image.setImageResource(R.drawable.facebook);
+                break;
+            case "Github":
+                holder.item_image.setImageResource(R.drawable.github);
+                break;
+            case "Google+":
+                holder.item_image.setImageResource(R.drawable.google_plus);
+                break;
+            case "Instagram":
+                holder.item_image.setImageResource(R.drawable.instagram);
+                break;
+            case "Spotify":
+                holder.item_image.setImageResource(R.drawable.spotify);
+                break;
+            case "Wifi":
+                holder.item_image.setImageResource(R.drawable.wifi_signal);
+                break;
+            default:
+                holder.item_image.setImageResource(R.drawable.arrow);
+                break;
+        }
 
-        holder.setItemClickListener(new ItemClickListener() {
+
+
+                            holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLondClick) {
                 row_index = position; // Set row index to selected position

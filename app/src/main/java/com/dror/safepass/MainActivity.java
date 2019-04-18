@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -205,9 +206,9 @@ public class MainActivity extends AppCompatActivity {
                         for (DocumentSnapshot doc:task.getResult())
                         {
                             ToDo toDo = new ToDo(doc.getString("id"),
-                                    "Platform: " + doc.getString("title"),
-                                    "User Name: "  + doc.getString("userName"),
-                                    "Password: " + doc.getString("password"));
+                                    doc.getString("title"),
+                                    doc.getString("userName"),
+                                    doc.getString("password"));
                             passwordList.add(toDo);
                         }
                         adapter = new ListItemAdapter(MainActivity.this,  passwordList);

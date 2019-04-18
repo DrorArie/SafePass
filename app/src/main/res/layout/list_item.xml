@@ -7,21 +7,25 @@
     android:layout_margin="10dp"
     app:cardElevation="10dp">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="10dp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp" />
 
         <TextView
             android:id="@+id/item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/chewy"
-            android:textColor="@color/mainColor"
-            android:textSize="30sp"
-            />
+            android:layout_toEndOf="@id/icon"
+            android:textSize="36sp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

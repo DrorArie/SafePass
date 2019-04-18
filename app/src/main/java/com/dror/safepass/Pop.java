@@ -58,12 +58,9 @@ public class Pop extends Activity{
         mAuth =FirebaseAuth.getInstance();
 
         if(!add) {
-            title.setText(MainActivity.passwordList.get(position).getTitle()
-                    .substring(MainActivity.passwordList.get(position).getTitle().indexOf(" ") + 1));
-            userName.setText(MainActivity.passwordList.get(position).getUserName()
-                    .substring(MainActivity.passwordList.get(position).getUserName().indexOf(":") + 2));
-            password.setText(MainActivity.passwordList.get(position).getPassword()
-                    .substring(MainActivity.passwordList.get(position).getPassword().indexOf(" ") + 1));
+            title.setText(MainActivity.passwordList.get(position).getTitle());
+            userName.setText(MainActivity.passwordList.get(position).getUserName());
+            password.setText(MainActivity.passwordList.get(position).getPassword());
         }
 
         Toast.makeText(Pop.this, title.getText(), Toast.LENGTH_SHORT).show();
