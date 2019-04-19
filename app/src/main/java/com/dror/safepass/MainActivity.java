@@ -1,33 +1,24 @@
 package com.dror.safepass;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
-
 import com.dror.safepass.Common.Common;
 import com.dror.safepass.Model.ToDo;
 import com.dror.safepass.adapter.ListItemAdapter;
@@ -36,31 +27,21 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.rengwuxian.materialedittext.MaterialEditText;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import dmax.dialog.SpotsDialog;
 
 public class MainActivity extends AppCompatActivity {
 
     public static List<ToDo> passwordList = new ArrayList<>();
+    @SuppressLint("StaticFieldLeak")
     public static FirebaseFirestore db;
 
+    @SuppressLint("StaticFieldLeak")
     public static RecyclerView listItem;
     static RecyclerView.LayoutManager layoutManager;
 
@@ -78,19 +59,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*final LayoutInflater factory = getLayoutInflater();
-
-        final View view = factory.inflate(R.layout.popwindow, null);
-
-        Pop.title = (MaterialEditText) view.findViewById(R.id.platformName);
-        Pop.userName = (MaterialEditText) view.findViewById(R.id.userName);
-        Pop.password = (MaterialEditText) view.findViewById(R.id.password);*/
-
         db = FirebaseFirestore.getInstance();
 
         dialog = new SpotsDialog(this);
 
-        listItem = (RecyclerView)findViewById(R.id.listPasswords);
+        listItem = findViewById(R.id.listPasswords);
         listItem.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         listItem.setLayoutManager(layoutManager);
@@ -104,10 +77,10 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
 
-        ImageButton add = (ImageButton) findViewById(R.id.add);
-        ImageButton edit = (ImageButton) findViewById(R.id.edit);
-        ImageButton delete = (ImageButton) findViewById(R.id.delete);
-        ImageButton copy = (ImageButton) findViewById(R.id.copy);
+        ImageButton add = findViewById(R.id.add);
+        ImageButton edit = findViewById(R.id.edit);
+        ImageButton delete = findViewById(R.id.delete);
+        ImageButton copy = findViewById(R.id.copy);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                     builder.setTitle("Confirm");
-                    builder.setMessage("Are you sure you want delete this?");
+                    builder.setMessage("Are you sure you want to delete this?");
 
                     builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
@@ -212,11 +185,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public ArrayList<ToDo> GetPasswordList(){
-        return (ArrayList<ToDo>) this.passwordList;
+        return (ArrayList<ToDo>) passwordList;
     }
 
     public FirebaseFirestore GetDB(){
-        return this.db;
+        return db;
     }
 
 
@@ -258,8 +231,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(this, MainActivity.class));
         }
-
-
 
     }
 
