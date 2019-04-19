@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/backgroundColor"
+        android:background="@color/rectangle"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
