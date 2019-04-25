@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
+        app:met_baseColor=""
         android:inputType="textVisiblePassword"
         app:layout_constraintBottom_toTopOf="@+id/fab"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +55,7 @@
         app:met_floatingLabel="highlight"
         app:met_singleLineEllipsis="true" />
 
-    <android.support.design.widget.FloatingActionButton xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
