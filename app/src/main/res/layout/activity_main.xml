@@ -64,7 +64,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    <ImageButton
         android:id="@+id/add"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -76,7 +76,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    <ImageButton
         android:id="@+id/edit"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -88,7 +88,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/add" />
 
-    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    <ImageButton
         android:id="@+id/delete"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -100,7 +100,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/edit" />
 
-    <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    <ImageButton
         android:id="@+id/copy"
         android:layout_width="60dp"
         android:layout_height="60dp"
