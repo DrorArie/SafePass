@@ -7,4 +7,5 @@
     <color name="backgroundColor">#FF343F4B</color>
     <color name="highlight">#6C7283</color>
     <color name="rectangle">#56575C</color>
+    <color name="white">#FFFFFF</color>
 </resources>
