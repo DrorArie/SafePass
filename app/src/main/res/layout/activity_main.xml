@@ -35,9 +35,9 @@
         android:layout_height="wrap_content"
         android:text="@string/your_passwords"
         android:textAlignment="center"
-        android:textSize="45sp"
+        android:textSize="47sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
