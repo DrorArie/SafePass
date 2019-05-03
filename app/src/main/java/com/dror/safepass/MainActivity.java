@@ -7,12 +7,14 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,6 +32,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -111,12 +115,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (Common.curretToDO != null)
                 {
-                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip =  ClipData.newPlainText(Common.curretToDO.getUserName(), Common.curretToDO.getUserName().substring(Common.curretToDO.getUserName().indexOf(":") + 2));
+                    final ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip =  ClipData.newPlainText(Common.curretToDO.getUserName(), Common.curretToDO.getUserName());
                     clipboard.setPrimaryClip(clip);
-                    clip =  ClipData.newPlainText(Common.curretToDO.getPassword(), Common.curretToDO.getPassword().substring(Common.curretToDO.getPassword().indexOf(" ") + 1));
+                    clip =  ClipData.newPlainText(Common.curretToDO.getPassword(), Common.curretToDO.getPassword());
                     clipboard.setPrimaryClip(clip);
                     Toast.makeText(MainActivity.this, "Copied!", Toast.LENGTH_SHORT).show();
+                    int DISPLAY_LENGTH = 5000;
+                    new Handler().postDelayed(new Runnable(){
+                    @Override
+                    public void run() {
+                        /*  Clear the clipboard. */
+                        ClipData data = ClipData.newPlainText("", "");
+                        clipboard.setPrimaryClip(data);
+                    }
+                }, DISPLAY_LENGTH);
                 }
                 else
                     Toast.makeText(MainActivity.this, "Please choose item", Toast.LENGTH_SHORT).show();
@@ -166,9 +179,43 @@ public class MainActivity extends AppCompatActivity {
         loadData();}
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        if(item.getTitle().equals("DELETE"))
-            deleteItem(item.getOrder());
+    public boolean onContextItemSelected(final MenuItem item) {
+        if(item.getTitle().equals("DELETE")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+            builder.setTitle("Confirm");
+            builder.setMessage("Are you sure you want to delete this?");
+
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+                    Common.curretToDO = null;
+                    deleteItem(item.getOrder());
+                }
+            });
+
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    // Do nothing
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+        if(item.getTitle().equals("COPY"))
+        {
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip =  ClipData.newPlainText(passwordList.get(item.getOrder()).getUserName(), passwordList.get(item.getOrder()).getUserName());
+            clipboard.setPrimaryClip(clip);
+            clip =  ClipData.newPlainText(passwordList.get(item.getOrder()).getPassword(), passwordList.get(item.getOrder()).getPassword());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(MainActivity.this, "Copied!", Toast.LENGTH_SHORT).show();
+        }
         return super.onContextItemSelected(item);
     }
 
@@ -201,12 +248,14 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //byte[] data = Base64.decode(, Base64.DEFAULT);
+                        //String text = new String(data, StandardCharsets.UTF_8);
                         for (DocumentSnapshot doc:task.getResult())
                         {
                             ToDo toDo = new ToDo(doc.getString("id"),
-                                    doc.getString("title"),
-                                    doc.getString("userName"),
-                                    doc.getString("password"));
+                                    new String(Base64.decode(doc.getString("title"), Base64.DEFAULT), StandardCharsets.UTF_8),
+                                    new String(Base64.decode(doc.getString("userName"), Base64.DEFAULT), StandardCharsets.UTF_8),
+                                    new String(Base64.decode(doc.getString("password"), Base64.DEFAULT), StandardCharsets.UTF_8));
                             passwordList.add(toDo);
                         }
                         adapter = new ListItemAdapter(MainActivity.this,  passwordList);
@@ -220,17 +269,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT ).show();
                     }
                 });
-
-    }
-
-    @Override
-    protected void  onStart() {
-        super.onStart();
-
-        if(mAuth.getCurrentUser() == null) {
-            finish();
-            startActivity(new Intent(this, MainActivity.class));
-        }
 
     }
 

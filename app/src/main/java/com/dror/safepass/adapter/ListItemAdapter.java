@@ -63,6 +63,7 @@ class ListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClick
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         menu.setHeaderTitle("Select the action");
         menu.add(0,0, getAdapterPosition(), "DELETE");
+        menu.add(1,1, getAdapterPosition(), "COPY");
 
     }
 }
@@ -116,20 +117,14 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
 
 
 
-                            holder.setItemClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(View view, int position, boolean isLondClick) {
-                row_index = position; // Set row index to selected position
-                Common.curretToDO = passwordList.get(position); // Set curret item is item selection
-                Common.position = position;
-                notifyDataSetChanged(); //made effect on recycleView adapter
-                /*
-                MainActivity.isUpdate = true;
-                MainActivity.idUpdate = passwordList.get(position).getId();
-                Intent intent = new Intent(mainActivity, Pop.class);
-                intent.putExtra("position", position);
-                mainActivity.startActivityForResult(intent, 1);*/
-            }
+        holder.setItemClickListener(new ItemClickListener() {
+        @Override
+        public void onClick(View view, int position, boolean isLondClick) {
+            row_index = position; // Set row index to selected position
+            Common.curretToDO = passwordList.get(position); // Set curret item is item selection
+            Common.position = position;
+            notifyDataSetChanged(); //made effect on recycleView adapter
+        }
         });
         if(row_index == position)
             holder.itemView.setBackgroundColor(Color.parseColor("#949CAA"));

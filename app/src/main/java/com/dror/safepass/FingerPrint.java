@@ -71,6 +71,7 @@ public class FingerPrint extends AppCompatActivity  implements View.OnClickListe
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
                     FirebaseUser user = mAuth.getCurrentUser();
+
                     if(user.isEmailVerified()){
                         finish();
                         Intent intent = new Intent(FingerPrint.this, MainActivity.class);
@@ -88,6 +89,14 @@ public class FingerPrint extends AppCompatActivity  implements View.OnClickListe
     }
 
 
+    @Override
+    protected void  onStart() {
+        super.onStart();
+        if(mAuth.getCurrentUser() != null) {
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
+        }
+    }
 
 
     @Override

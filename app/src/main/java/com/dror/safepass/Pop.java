@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Toast;
@@ -26,7 +27,10 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,9 +123,15 @@ public class Pop extends Activity{
         Map<String, Object> todo = new HashMap<>();
         todo.put("User_id", mAuth.getCurrentUser().getUid());
         todo.put("id", id);
-        todo.put("title",title);
-        todo.put("userName",userName);
-        todo.put("password", password);
+        byte[] data = title.getBytes(StandardCharsets.UTF_8);
+        String encode = Base64.encodeToString(data, Base64.DEFAULT);
+        todo.put("title", encode);
+        data = userName.getBytes(StandardCharsets.UTF_8);
+        encode = Base64.encodeToString(data, Base64.DEFAULT);
+        todo.put("userName",encode);
+        data = password.getBytes(StandardCharsets.UTF_8);
+        encode = Base64.encodeToString(data, Base64.DEFAULT);
+        todo.put("password", encode);
 
         MainActivity.db.collection("passwordsList").document(id)
                 .set(todo).addOnSuccessListener(new OnSuccessListener<Void>() {
