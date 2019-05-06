@@ -101,7 +101,9 @@ public class Pop extends Activity{
 
     private void updateData(String title, String userName, String password) {
         MainActivity.db.collection("passwordsList").document(MainActivity.idUpdate)
-                .update("title",  title, "userName", userName, "password", password)
+                .update("title",  Base64.encodeToString(title.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT),
+                        "userName", Base64.encodeToString(userName.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT),
+                        "password", Base64.encodeToString(password.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
