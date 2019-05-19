@@ -88,7 +88,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     user.sendEmailVerification();
                     Toast.makeText(SignUpActivity.this, "Verification email sent", Toast.LENGTH_SHORT ).show();
                     finish();
-                    startActivity(new Intent(SignUpActivity.this, FingerPrint.class));
+                    startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
 
                 }else{
                     if(task.getException() instanceof FirebaseAuthInvalidUserException){
@@ -111,7 +111,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             case R.id.loginScreen:
                 finish();
-                startActivity(new Intent(this, FingerPrint.class));
+                startActivity(new Intent(this, SignInActivity.class));
                 break;
 
         }

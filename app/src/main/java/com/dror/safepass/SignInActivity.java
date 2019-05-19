@@ -16,7 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class FingerPrint extends AppCompatActivity  implements View.OnClickListener {
+public class SignInActivity extends AppCompatActivity  implements View.OnClickListener {
 
     FirebaseAuth mAuth;
     EditText editTextEmail , editTextPassword;
@@ -74,12 +74,12 @@ public class FingerPrint extends AppCompatActivity  implements View.OnClickListe
 
                     if(user.isEmailVerified()){
                         finish();
-                        Intent intent = new Intent(FingerPrint.this, MainActivity.class);
+                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
                     }else{
-                        Toast.makeText(FingerPrint.this, "Email not verified", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignInActivity.this, "Email not verified", Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();

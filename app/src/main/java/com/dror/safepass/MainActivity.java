@@ -231,14 +231,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public ArrayList<ToDo> GetPasswordList(){
-        return (ArrayList<ToDo>) passwordList;
-    }
-
-    public FirebaseFirestore GetDB(){
-        return db;
-    }
-
 
     public void loadData() {
         dialog.show();
@@ -289,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
 
                 FirebaseAuth.getInstance().signOut();
                 finish();
-                startActivity(new Intent(this, FingerPrint.class));
+                startActivity(new Intent(this, SignInActivity.class));
 
                 break;
         }
