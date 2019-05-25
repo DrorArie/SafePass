@@ -63,39 +63,30 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
             editTextPassword.requestFocus();
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE); // the progressbar now can be seen
 
+        // connected to exist user with email and password
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE); // vanish the progressbar
                 if(task.isSuccessful()){
-                    FirebaseUser user = mAuth.getCurrentUser();
+                    FirebaseUser user = mAuth.getCurrentUser(); // set me to my user and connect me to my account
 
-                    if(user.isEmailVerified()){
+                    if(user.isEmailVerified()){ // if email verified
                         finish();
                         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
+                        startActivity(intent); // open my account
 
-                    }else{
+                    }else{  // email not verified, have to verify email first
                         Toast.makeText(SignInActivity.this, "Email not verified", Toast.LENGTH_SHORT).show();
                     }
-                }else{
+                }else{  // unknown error occur
                     Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
-    }
-
-
-    @Override
-    protected void  onStart() {
-        super.onStart();
-        if(mAuth.getCurrentUser() != null) {
-            finish();
-            startActivity(new Intent(this, MainActivity.class));
-        }
     }
 
 

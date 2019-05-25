@@ -34,7 +34,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         editTextConfirmedPassword = findViewById(R.id.confirmPassword);
         progressBar = findViewById(R.id.progressBar);
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance(); // getting the current user, in this case null
 
         findViewById(R.id.buttonSignUp).setOnClickListener(this);
         findViewById(R.id.loginScreen).setOnClickListener(this);
@@ -79,21 +79,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         progressBar.setVisibility(View.VISIBLE);
 
+        // create new user with email and password
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                progressBar.setVisibility(View.GONE);
-                if(task.isSuccessful()){
+                progressBar.setVisibility(View.GONE);  // invisible the progressbar
+                if(task.isSuccessful()){  // if succeeded create new user
                     FirebaseUser user = mAuth.getCurrentUser();
-                    user.sendEmailVerification();
+                    user.sendEmailVerification(); // send him verification email
                     Toast.makeText(SignUpActivity.this, "Verification email sent", Toast.LENGTH_SHORT ).show();
-                    finish();
-                    startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+                    finish(); // close this screen
+                    startActivity(new Intent(SignUpActivity.this, SignInActivity.class)); // start new activity
 
-                }else{
-                    if(task.getException() instanceof FirebaseAuthInvalidUserException){
+                }else{  // if not succeeded to create new user
+                    if(task.getException() instanceof FirebaseAuthInvalidUserException){  // email already exists in the data base
                         Toast.makeText(getApplicationContext(), "You are already registered", Toast.LENGTH_SHORT).show();
-                    }else{
+                    }else{  // unknown error
                         Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }

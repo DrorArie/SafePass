@@ -30,7 +30,7 @@ dependencies {
     implementation 'com.android.support:design:28.0.0' // allowing the use in specific gui design
     implementation 'com.android.support:cardview-v7:28.0.0' // allowing the use in cards in list
     implementation 'com.android.support:recyclerview-v7:28.0.0' // allowing the use in list at the main activity
-    implementation 'com.github.d-max:spots-dialog:0.7@aar' // allowing the use in pop window
+    implementation 'com.github.d-max:spots-dialog:0.7@aar' // allowing the use in small dialogs
     implementation 'com.rengwuxian.materialedittext:library:2.1.4' // allowing the use in edit text which save the data
 
     testImplementation 'junit:junit:4.12'

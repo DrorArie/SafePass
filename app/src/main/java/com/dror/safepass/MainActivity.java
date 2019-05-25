@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance(); // Stores the information that belongs to the user in the database
 
         dialog = new SpotsDialog(this);
 
@@ -181,14 +181,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
         if(item.getTitle().equals("DELETE")) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);  // build dialog
 
             builder.setTitle("Confirm");
-            builder.setMessage("Are you sure you want to delete this?");
+            builder.setMessage("Are you sure you want to delete this?"); // set his context
 
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(DialogInterface dialog, int which) { // one button will be YES
                     Common.curretToDO = null;
                     deleteItem(item.getOrder());
                 }
@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
             builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
 
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(DialogInterface dialog, int which) { // the other one NO
 
                     // Do nothing
                     dialog.dismiss();
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
             AlertDialog alert = builder.create();
-            alert.show();
+            alert.show(); // show thw dialog
         }
         if(item.getTitle().equals("COPY"))
         {
@@ -220,42 +220,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deleteItem(int index) {
-        db.collection("passwordsList")
-                .document(passwordList.get(index).getId())
-                .delete()
+        db.collection("passwordsList")  // Marks the appropriate directory
+                .document(passwordList.get(index).getId())  // // Marks the appropriate item
+                .delete() // delete it
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        loadData();
+                        loadData();  // load the updated list
                     }
                 });
     }
 
 
     public void loadData() {
-        dialog.show();
-        if(passwordList.size() > 0)
+        dialog.show(); // show loading dialog
+        if(passwordList.size() > 0) // clear the old list
             passwordList.clear();
+        // open the correct collection
         db.collection("passwordsList").whereEqualTo("User_id", mAuth.getCurrentUser().getUid()).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         //byte[] data = Base64.decode(, Base64.DEFAULT);
                         //String text = new String(data, StandardCharsets.UTF_8);
-                        for (DocumentSnapshot doc:task.getResult())
-                        {
+                        for (DocumentSnapshot doc:task.getResult())   // load the details of every item ti the screen list
+                        { // cancel the Encryption
                             ToDo toDo = new ToDo(doc.getString("id"),
                                     new String(Base64.decode(doc.getString("title"), Base64.DEFAULT), StandardCharsets.UTF_8),
                                     new String(Base64.decode(doc.getString("userName"), Base64.DEFAULT), StandardCharsets.UTF_8),
                                     new String(Base64.decode(doc.getString("password"), Base64.DEFAULT), StandardCharsets.UTF_8));
                             passwordList.add(toDo);
                         }
-                        adapter = new ListItemAdapter(MainActivity.this,  passwordList);
+                        adapter = new ListItemAdapter(MainActivity.this,  passwordList); // open the list in the screen
                         listItem.setAdapter(adapter);
-                        dialog.dismiss();
+                        dialog.dismiss(); // close the loading dialog
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
+                .addOnFailureListener(new OnFailureListener() { // in case of failure print the message
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT ).show();

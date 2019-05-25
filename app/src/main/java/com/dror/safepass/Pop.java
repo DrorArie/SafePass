@@ -100,7 +100,9 @@ public class Pop extends Activity{
     }
 
     private void updateData(String title, String userName, String password) {
+        // open the correct collection and item
         MainActivity.db.collection("passwordsList").document(MainActivity.idUpdate)
+                // update his details
                 .update("title",  Base64.encodeToString(title.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT),
                         "userName", Base64.encodeToString(userName.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT),
                         "password", Base64.encodeToString(password.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT))
@@ -108,12 +110,12 @@ public class Pop extends Activity{
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(Pop.this, "Updated!", Toast.LENGTH_SHORT).show();
-                        finish();
+                        finish(); // close the pop screen
                     }
                 });
 
         MainActivity.db.collection("passwordsList").document(MainActivity.idUpdate)
-                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {  // check for exceptions in the update
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                     }
@@ -121,8 +123,9 @@ public class Pop extends Activity{
     }
 
     private void setData(String title, String userName, String password) {
-        String id = UUID.randomUUID().toString();
+        String id = UUID.randomUUID().toString(); // create random id for the item
         Map<String, Object> todo = new HashMap<>();
+        // Enters the information into the item's fields
         todo.put("User_id", mAuth.getCurrentUser().getUid());
         todo.put("id", id);
         byte[] data = title.getBytes(StandardCharsets.UTF_8);
@@ -136,10 +139,11 @@ public class Pop extends Activity{
         todo.put("password", encode);
 
         MainActivity.db.collection("passwordsList").document(id)
+                // add the item to the database
                 .set(todo).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                finish();
+                finish(); // close the pop screen
             }
         });
     }
