@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         //byte[] data = Base64.decode(, Base64.DEFAULT);
                         //String text = new String(data, StandardCharsets.UTF_8);
-                        for (DocumentSnapshot doc:task.getResult())   // load the details of every item ti the screen list
+                        for (DocumentSnapshot doc:task.getResult())   // load the details of every item to the screen list
                         { // cancel the Encryption
                             ToDo toDo = new ToDo(doc.getString("id"),
                                     new String(Base64.decode(doc.getString("title"), Base64.DEFAULT), StandardCharsets.UTF_8),

@@ -80,7 +80,7 @@ public class Pop extends Activity{
                     setData(title.getText().toString(),userName.getText().toString(),password.getText().toString());
                 }
                 else
-                {
+                 {
                     Toast.makeText(Pop.this, "Updated!", Toast.LENGTH_SHORT).show();
                     updateData(title.getText().toString(),userName.getText().toString(), password.getText().toString());
                     MainActivity.isUpdate = !MainActivity.isUpdate;

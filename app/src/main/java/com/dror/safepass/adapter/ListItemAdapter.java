@@ -1,5 +1,6 @@
 package com.dror.safepass.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -87,34 +88,31 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
         return new ListItemViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ListItemViewHolder holder, int position) {
-
+        // Check for adding the right icon
+        String title = passwordList.get(position).getTitle().substring(0, 1).toUpperCase() + passwordList.get(position).getTitle().substring(1);
         holder.item_title.setText("  " + passwordList.get(position).getTitle());
-        switch (passwordList.get(position).getTitle()) {
-            case "Facebook":
-                holder.item_image.setImageResource(R.drawable.facebook);
-                break;
-            case "Github":
+        if (title.indexOf('F') >= 0 && title.indexOf('c') >= 0 && title.indexOf('b') >= 0 && title.indexOf('k') >= 0)
+            holder.item_image.setImageResource(R.drawable.facebook);
+        else
+            if (title.indexOf('G') >= 0 && title.indexOf('t') >= 0 && title.indexOf('h') >= 0 && title.indexOf('b') >= 0)
                 holder.item_image.setImageResource(R.drawable.github);
-                break;
-            case "Google+":
-                holder.item_image.setImageResource(R.drawable.google_plus);
-                break;
-            case "Instagram":
-                holder.item_image.setImageResource(R.drawable.instagram);
-                break;
-            case "Spotify":
-                holder.item_image.setImageResource(R.drawable.spotify);
-                break;
-            case "Wifi":
-                holder.item_image.setImageResource(R.drawable.wifi_signal);
-                break;
-            default:
-                holder.item_image.setImageResource(R.drawable.arrow);
-                break;
-        }
-
+            else
+                if (title.indexOf('G') >= 0 && title.indexOf('o') >= 0 && title.indexOf('l') >= 0 && title.indexOf('+') >= 0)
+                    holder.item_image.setImageResource(R.drawable.google_plus);
+                else
+                    if (title.indexOf('I') >= 0 && title.indexOf('n') >= 0 && title.indexOf('g') >= 0 && title.indexOf('m') >= 0)
+                        holder.item_image.setImageResource(R.drawable.instagram);
+                    else
+                        if (title.indexOf('S') >= 0 && title.indexOf('p') >= 0 && title.indexOf('t') >= 0 && title.indexOf('y') >= 0)
+                            holder.item_image.setImageResource(R.drawable.spotify);
+                        else
+                            if (title.indexOf('W') >= 0 && title.indexOf('f') >= 0 && title.indexOf('i') >= 0)
+                                holder.item_image.setImageResource(R.drawable.wifi_signal);
+                            else
+                                holder.item_image.setImageResource(R.drawable.arrow);
 
 
         holder.setItemClickListener(new ItemClickListener() {

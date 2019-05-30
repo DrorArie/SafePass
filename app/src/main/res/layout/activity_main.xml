@@ -67,8 +67,8 @@
 
     <ImageButton
         android:id="@+id/add"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/add"
         android:contentDescription="@string/todo"
@@ -79,8 +79,8 @@
 
     <ImageButton
         android:id="@+id/edit"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/edit"
         android:contentDescription="@string/todo"
@@ -91,8 +91,8 @@
 
     <ImageButton
         android:id="@+id/delete"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/remove"
         android:contentDescription="@string/todo"
@@ -103,8 +103,8 @@
 
     <ImageButton
         android:id="@+id/copy"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/copy"
         android:contentDescription="@string/todo"
