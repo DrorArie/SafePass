@@ -67,24 +67,36 @@ public class Pop extends Activity{
             password.setText(MainActivity.passwordList.get(position).getPassword());
         }
 
-        Toast.makeText(Pop.this, title.getText(), Toast.LENGTH_SHORT).show();
         MainActivity.db = FirebaseFirestore.getInstance();
 
         fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!MainActivity.isUpdate)
-                    {
-                    Toast.makeText(Pop.this, "added!", Toast.LENGTH_SHORT).show();
-                    setData(title.getText().toString(),userName.getText().toString(),password.getText().toString());
+                if(title.getText().toString().equals("")){
+                    Toast.makeText(Pop.this, "Title is required", Toast.LENGTH_SHORT).show();
                 }
                 else
-                 {
-                    Toast.makeText(Pop.this, "Updated!", Toast.LENGTH_SHORT).show();
-                    updateData(title.getText().toString(),userName.getText().toString(), password.getText().toString());
-                    MainActivity.isUpdate = !MainActivity.isUpdate;
-                }
+                    if(userName.getText().toString().equals(""))
+                        Toast.makeText(Pop.this, "User name is required", Toast.LENGTH_SHORT).show();
+                    else
+                        if(password.getText().toString().equals(""))
+                            Toast.makeText(Pop.this, "Password is required", Toast.LENGTH_SHORT).show();
+                        else
+                            if(!MainActivity.isUpdate && !title.getText().toString().equals("") && !userName.getText().toString().equals("")
+                                    && !password.getText().toString().equals(""))
+                            {
+                                Toast.makeText(Pop.this, "added!", Toast.LENGTH_SHORT).show();
+                                setData(title.getText().toString(),userName.getText().toString(),password.getText().toString());
+                            }
+                            else
+                                if (!title.getText().toString().equals("") && !userName.getText().toString().equals("")
+                                        && !password.getText().toString().equals(""))
+                                {
+                                    Toast.makeText(Pop.this, "Updated!", Toast.LENGTH_SHORT).show();
+                                    updateData(title.getText().toString(),userName.getText().toString(), password.getText().toString());
+                                    MainActivity.isUpdate = !MainActivity.isUpdate;
+                                }
             }
         });
 
