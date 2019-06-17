@@ -24,14 +24,17 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.google.firebase:firebase-auth:16.2.0' // allowing the firebase authentication
+    implementation 'com.google.firebase:firebase-auth:16.2.0'
+    // allowing the firebase authentication
     implementation 'com.google.firebase:firebase-storage:16.1.0' // allowing the firebase storage
     implementation 'com.google.firebase:firebase-firestore:18.1.0' // allowing the firebase cloud
     implementation 'com.android.support:design:28.0.0' // allowing the use in specific gui design
     implementation 'com.android.support:cardview-v7:28.0.0' // allowing the use in cards in list
-    implementation 'com.android.support:recyclerview-v7:28.0.0' // allowing the use in list at the main activity
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    // allowing the use in list at the main activity
     implementation 'com.github.d-max:spots-dialog:0.7@aar' // allowing the use in small dialogs
-    implementation 'com.rengwuxian.materialedittext:library:2.1.4' // allowing the use in edit text which save the data
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+    // allowing the use in edit text which save the data
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

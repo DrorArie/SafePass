@@ -7,6 +7,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivityForResult(intent, 1);}
                 else
                     Toast.makeText(MainActivity.this, "Please choose item", Toast.LENGTH_SHORT ).show();
-                Common.curretToDO = null;
+                Common.curretToDO = null;  // after you make an action you have to choose the item again
             }
         });
 
@@ -115,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (Common.curretToDO != null)
                 {
+                    Common.row_index = -1;
+                    adapter.notifyItemChanged(Common.position);
                     final ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip =  ClipData.newPlainText(Common.curretToDO.getUserName(), Common.curretToDO.getUserName());
                     clipboard.setPrimaryClip(clip);
@@ -142,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (Common.curretToDO != null)
                 {
+                    Common.row_index = -1;
+                    adapter.notifyItemChanged(Common.position);
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                     builder.setTitle("Confirm");
@@ -215,6 +220,12 @@ public class MainActivity extends AppCompatActivity {
             clip =  ClipData.newPlainText(passwordList.get(item.getOrder()).getPassword(), passwordList.get(item.getOrder()).getPassword());
             clipboard.setPrimaryClip(clip);
             Toast.makeText(MainActivity.this, "Copied!", Toast.LENGTH_SHORT).show();
+        }
+        if(item.getTitle().equals("View"))
+        {
+            Intent intent = new Intent(MainActivity.this, Pop.class);
+            intent.putExtra("view", true);
+            startActivityForResult(intent, 1);
         }
         return super.onContextItemSelected(item);
     }

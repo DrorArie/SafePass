@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".ForgetPassword"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SignInActivity" />
@@ -20,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Pop"
             android:theme="@style/AppTheme.CustomTheme" />

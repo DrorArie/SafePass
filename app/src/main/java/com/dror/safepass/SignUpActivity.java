@@ -29,15 +29,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        editTextEmail = findViewById(R.id.email);
-        editTextPassword = findViewById(R.id.password);
-        editTextConfirmedPassword = findViewById(R.id.confirmPassword);
-        progressBar = findViewById(R.id.progressBar);
+        editTextEmail = findViewById(R.id.text_email);
+        editTextPassword = findViewById(R.id.edit_text_password);
+        editTextConfirmedPassword = findViewById(R.id.edit_text_confirm_password);
+        progressBar = findViewById(R.id.progressbar);
 
         mAuth = FirebaseAuth.getInstance(); // getting the current user, in this case null
 
-        findViewById(R.id.buttonSignUp).setOnClickListener(this);
-        findViewById(R.id.loginScreen).setOnClickListener(this);
+        findViewById(R.id.button_sign_up).setOnClickListener(this);
+        findViewById(R.id.text_view_login).setOnClickListener(this);
 
     }
 
@@ -67,14 +67,29 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
         if (!(confimedPassword.equals(password))){
-            editTextConfirmedPassword.setError("Password aren't equal");
+            editTextConfirmedPassword.setError("Invalid passwords");
             editTextConfirmedPassword.requestFocus();
             return;
         }
-
-        if(password.length() < 6){
-            editTextPassword.setError("Minimum length of password should be 6");
+        if(password.length() < 8){
+            editTextPassword.setError("Minimum length of password should be 8");
             editTextPassword.requestFocus();
+            return;
+        }
+        if(!password.matches(".*[0-9].*")){
+            editTextPassword.setError("Password must contain digits");
+            editTextPassword.requestFocus();
+            return;
+        }
+        if(!password.matches(".*[a-z].*")){
+            editTextPassword.setError("Password must contain letters");
+            editTextPassword.requestFocus();
+            return;
+        }
+        if(!password.matches(".*[A-Z].*")){
+            editTextPassword.setError("Password must contain uppercase letters");
+            editTextPassword.requestFocus();
+            return;
         }
 
         progressBar.setVisibility(View.VISIBLE);
@@ -106,13 +121,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.buttonSignUp:
+            case R.id.button_sign_up:
                 registerUser();
                 break;
 
-            case R.id.loginScreen:
+            case R.id.text_view_login:
                 finish();
                 startActivity(new Intent(this, SignInActivity.class));
+                break;
+
+            case R.id.text_view_forget_password:
+                finish();
+                startActivity(new Intent(this, ForgetPassword.class));
                 break;
 
         }

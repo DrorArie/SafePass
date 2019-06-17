@@ -13,13 +13,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Platform"
-        app:met_baseColor="@color/white"
         android:inputType="textPersonName"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/userName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:met_baseColor="@color/white"
         app:met_floatingLabel="highlight"
         app:met_singleLineEllipsis="true" />
 
