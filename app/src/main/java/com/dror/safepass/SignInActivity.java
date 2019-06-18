@@ -35,6 +35,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
 
         findViewById(R.id.text_view_register).setOnClickListener(this);
         findViewById(R.id.button_sign_in).setOnClickListener(this);
+        findViewById(R.id.text_view_forget_password).setOnClickListener(this);
     }
 
     private void userLogin() {
@@ -116,13 +117,18 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
             startActivity(new Intent(this, MainActivity.class));
         }
     }*/
-
+/* dick */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case  R.id.text_view_register:
                 finish();
                 startActivity(new Intent(this, SignUpActivity.class ));
+                break;
+
+            case R.id.text_view_forget_password:
+                finish();
+                startActivity(new Intent(this, ForgetPassword.class ));
                 break;
 
             case R.id.button_sign_in:
