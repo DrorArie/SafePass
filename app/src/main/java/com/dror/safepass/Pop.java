@@ -1,38 +1,21 @@
 package com.dror.safepass;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Toast;
-import com.dror.safepass.MainActivity;
-
-import com.dror.safepass.Model.ToDo;
-import com.dror.safepass.adapter.ListItemAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.rengwuxian.materialedittext.MaterialEditText;
-
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -59,7 +42,18 @@ public class Pop extends Activity{
 
         boolean add = getIntent().getBooleanExtra("add", false);
 
+        final boolean view = getIntent().getBooleanExtra("view", false);
+
         mAuth =FirebaseAuth.getInstance();
+
+        fab = (FloatingActionButton)findViewById(R.id.fab);
+
+        if(view){
+            title.setEnabled(false);
+            userName.setEnabled(false);
+            password.setEnabled(false);
+            fab.setImageResource(R.drawable.ic_arrow_back_black_24dp);
+        }
 
         if(!add) {
             title.setText(MainActivity.passwordList.get(position).getTitle());
@@ -69,36 +63,39 @@ public class Pop extends Activity{
 
         MainActivity.db = FirebaseFirestore.getInstance();
 
-        fab = (FloatingActionButton)findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(title.getText().toString().equals("")){
-                    Toast.makeText(Pop.this, "Title is required", Toast.LENGTH_SHORT).show();
-                }
+                if(view)
+                    finish();
                 else
-                    if(userName.getText().toString().equals(""))
-                        Toast.makeText(Pop.this, "User name is required", Toast.LENGTH_SHORT).show();
+                    if(title.getText().toString().equals("")){
+                        Toast.makeText(Pop.this, "Title is required", Toast.LENGTH_SHORT).show();
+                    }
                     else
-                        if(password.getText().toString().equals(""))
-                            Toast.makeText(Pop.this, "Password is required", Toast.LENGTH_SHORT).show();
+                        if(userName.getText().toString().equals(""))
+                            Toast.makeText(Pop.this, "User name is required", Toast.LENGTH_SHORT).show();
                         else
-                            if(!MainActivity.isUpdate && !title.getText().toString().equals("") && !userName.getText().toString().equals("")
-                                    && !password.getText().toString().equals(""))
-                            {
-                                Toast.makeText(Pop.this, "added!", Toast.LENGTH_SHORT).show();
-                                setData(title.getText().toString(),userName.getText().toString(),password.getText().toString());
-                            }
+                            if(password.getText().toString().equals(""))
+                                Toast.makeText(Pop.this, "Password is required", Toast.LENGTH_SHORT).show();
                             else
-                                if (!title.getText().toString().equals("") && !userName.getText().toString().equals("")
+                                if(!MainActivity.isUpdate && !title.getText().toString().equals("") && !userName.getText().toString().equals("")
                                         && !password.getText().toString().equals(""))
                                 {
-                                    Toast.makeText(Pop.this, "Updated!", Toast.LENGTH_SHORT).show();
-                                    updateData(title.getText().toString(),userName.getText().toString(), password.getText().toString());
-                                    MainActivity.isUpdate = !MainActivity.isUpdate;
+                                    Toast.makeText(Pop.this, "added!", Toast.LENGTH_SHORT).show();
+                                    setData(title.getText().toString(),userName.getText().toString(),password.getText().toString());
                                 }
-            }
-        });
+                                else
+                                    if (!title.getText().toString().equals("") && !userName.getText().toString().equals("")
+                                            && !password.getText().toString().equals(""))
+                                    {
+                                        Toast.makeText(Pop.this, "Updated!", Toast.LENGTH_SHORT).show();
+                                        updateData(title.getText().toString(),userName.getText().toString(), password.getText().toString());
+                                        MainActivity.isUpdate = !MainActivity.isUpdate;
+                                    }
+                }
+            });
 
         DisplayMetrics dm = new DisplayMetrics();
 

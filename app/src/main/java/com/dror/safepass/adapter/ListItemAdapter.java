@@ -65,6 +65,7 @@ class ListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClick
         menu.setHeaderTitle("Select the action");
         menu.add(0,0, getAdapterPosition(), "DELETE");
         menu.add(1,1, getAdapterPosition(), "COPY");
+        menu.add(2,2, getAdapterPosition(), "View");
 
     }
 }
@@ -92,8 +93,9 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ListItemViewHolder holder, int position) {
         // Check for adding the right icon
-        String title = passwordList.get(position).getTitle().substring(0, 1).toUpperCase() + passwordList.get(position).getTitle().substring(1);
-        holder.item_title.setText("  " + passwordList.get(position).getTitle());
+        String title = passwordList.get(position).getTitle().substring(0, 1).toUpperCase() +
+                passwordList.get(position).getTitle().substring(1);
+        holder.item_title.setText("  " + title);
         if (title.indexOf('F') >= 0 && title.indexOf('c') >= 0 && title.indexOf('b') >= 0 && title.indexOf('k') >= 0)
             holder.item_image.setImageResource(R.drawable.facebook);
         else
@@ -118,17 +120,23 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemViewHolder>{
         holder.setItemClickListener(new ItemClickListener() {
         @Override
         public void onClick(View view, int position, boolean isLondClick) {
-            row_index = position; // Set row index to selected position
-            Common.curretToDO = passwordList.get(position); // Set curret item is item selection
+            Common.row_index = position; // Set row index to selected position
+            row_index = position;
+            Common.curretToDO = passwordList.get(position); // Set current item is item selection
             Common.position = position;
-            notifyDataSetChanged(); //made effect on recycleView adapter
+            notifyDataSetChanged(); // update the changes
+
         }
         });
-        if(row_index == position)
-            holder.itemView.setBackgroundColor(Color.parseColor("#949CAA"));
-        else
+        if (Common.row_index == -1)
             holder.itemView.setBackgroundColor(Color.parseColor("#FF343F4B"));
+        else
+            if(row_index == position) {
+                holder.itemView.setBackgroundColor(Color.parseColor("#949CAA"));
 
+            }
+            else
+                holder.itemView.setBackgroundColor(Color.parseColor("#FF343F4B"));
 
     }
 

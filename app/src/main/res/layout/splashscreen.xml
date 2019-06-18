@@ -11,10 +11,11 @@
     <TextView
         android:id="@+id/textView"
         style="@style/title"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/safepass"
         android:textAlignment="center"
+        android:textSize="80sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,8 +23,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:background="@drawable/safe_box_picture"
         android:contentDescription="@string/safepass"
         app:layout_constraintBottom_toBottomOf="parent"

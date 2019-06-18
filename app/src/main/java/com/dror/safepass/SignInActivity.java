@@ -20,7 +20,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
 
     FirebaseAuth mAuth;
     EditText editTextEmail , editTextPassword;
-    ProgressBar progressBar;
+    ProgressBar progressbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +29,12 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
 
         mAuth = FirebaseAuth.getInstance();
 
-        editTextEmail = findViewById(R.id.email);
-        editTextPassword = findViewById(R.id.password);
-        progressBar = findViewById(R.id.progressBar);
+        editTextEmail = findViewById(R.id.text_email);
+        editTextPassword = findViewById(R.id.edit_text_password);
+        progressbar = findViewById(R.id.progressbar);
 
-        findViewById(R.id.SignUp).setOnClickListener(this);
-        findViewById(R.id.Login).setOnClickListener(this);
+        findViewById(R.id.text_view_register).setOnClickListener(this);
+        findViewById(R.id.button_sign_in).setOnClickListener(this);
     }
 
     private void userLogin() {
@@ -58,18 +58,36 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
             editTextPassword.requestFocus();
             return;
         }
-        if(password.length() < 6){
-            editTextPassword.setError("Minimum length of password should be 6");
+        if(password.length() < 8){
+            editTextPassword.setError("Minimum length of password should be 8");
             editTextPassword.requestFocus();
+            return;
+        }
+        if(!password.matches(".*[0-9].*")){
+            editTextPassword.setError("Password must contain digits");
+            editTextPassword.requestFocus();
+            return;
+        }
+        if(!password.matches(".*[a-z].*")){
+            editTextPassword.setError("Password must contain letters");
+            editTextPassword.requestFocus();
+            return;
+        }
+        if(!password.matches(".*[A-Z].*")){
+            editTextPassword.setError("Password must contain uppercase letters");
+            editTextPassword.requestFocus();
+            return;
         }
 
-        progressBar.setVisibility(View.VISIBLE); // the progressbar now can be seen
+
+
+        progressbar.setVisibility(View.VISIBLE); // the progressbar now can be seen
 
         // connected to exist user with email and password
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                progressBar.setVisibility(View.GONE); // vanish the progressbar
+                progressbar.setVisibility(View.GONE); // vanish the progressbar
                 if(task.isSuccessful()){
                     FirebaseUser user = mAuth.getCurrentUser(); // set me to my user and connect me to my account
 
@@ -89,16 +107,25 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
         });
     }
 
+    /*protected void onStart() {
+        super.onStart();
+
+        if(mAuth.getCurrentUser() != null)
+        {
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
+        }
+    }*/
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case  R.id.SignUp:
+            case  R.id.text_view_register:
                 finish();
                 startActivity(new Intent(this, SignUpActivity.class ));
                 break;
 
-            case R.id.Login:
+            case R.id.button_sign_in:
                 userLogin();
                 break;
 

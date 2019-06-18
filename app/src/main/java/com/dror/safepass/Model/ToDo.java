@@ -2,7 +2,6 @@ package com.dror.safepass.Model;
 
 public class ToDo {
     private String id, title, userName, password;
-    private  boolean isChecked;
 
     public ToDo(String id, String title, String userName, String password) {
         this.id = id;
