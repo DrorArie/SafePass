@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth =FirebaseAuth.getInstance();
 
-        loadData();
+        loadData();  // loads the data of the user
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton delete = findViewById(R.id.delete);
         ImageButton copy = findViewById(R.id.copy);
 
-        add.setOnClickListener(new View.OnClickListener() {
+        add.setOnClickListener(new View.OnClickListener() {  // if add entered
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Pop.class);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { // if edit entered
                 if (Common.curretToDO != null)
                 {
                     isUpdate = true;
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         copy.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { // if copy entered
                 if (Common.curretToDO != null)
                 {
                     Common.row_index = -1;
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { // if delete entered
                 if (Common.curretToDO != null)
                 {
                     Common.row_index = -1;
@@ -179,12 +179,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) { // if sends parameters to the pop screen
         super.onActivityResult(requestCode, resultCode, data);
         loadData();}
 
     @Override
-    public boolean onContextItemSelected(final MenuItem item) {
+    public boolean onContextItemSelected(final MenuItem item) {  // on long tap on item
         if(item.getTitle().equals("DELETE")) {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);  // build dialog
 
@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {  // creates the options menu on the top right corner
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
@@ -288,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()){ // if the user wanna log out
             case R.id.menuLogout:
 
                 FirebaseAuth.getInstance().signOut();

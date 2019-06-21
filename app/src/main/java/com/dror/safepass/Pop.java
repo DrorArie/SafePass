@@ -38,24 +38,25 @@ public class Pop extends Activity{
         userName = (MaterialEditText) findViewById(R.id.userName);
         password = (MaterialEditText) findViewById(R.id.password);
 
-        int position = getIntent().getIntExtra("position", 0);
+        int position = getIntent().getIntExtra("position", 0);  // gets the position of item from the MainActivity
 
-        boolean add = getIntent().getBooleanExtra("add", false);
+        boolean add = getIntent().getBooleanExtra("add", false);  // gets if the user wanna add or edit item
 
-        final boolean view = getIntent().getBooleanExtra("view", false);
+        final boolean view = getIntent().getBooleanExtra("view", false); // gets if the user just want to view the item's details
 
         mAuth =FirebaseAuth.getInstance();
 
         fab = (FloatingActionButton)findViewById(R.id.fab);
 
-        if(view){
+        if(view){  // if the user wanna watch the item details, sets all the editTexts to disabled
+            // and switch the save button with back button
             title.setEnabled(false);
             userName.setEnabled(false);
             password.setEnabled(false);
             fab.setImageResource(R.drawable.ic_arrow_back_black_24dp);
         }
 
-        if(!add) {
+        if(!add) {  // if edit' load the item's details
             title.setText(MainActivity.passwordList.get(position).getTitle());
             userName.setText(MainActivity.passwordList.get(position).getUserName());
             password.setText(MainActivity.passwordList.get(position).getPassword());
@@ -69,7 +70,7 @@ public class Pop extends Activity{
             public void onClick(View v) {
                 if(view)
                     finish();
-                else
+                else // check for validation
                     if(title.getText().toString().equals("")){
                         Toast.makeText(Pop.this, "Title is required", Toast.LENGTH_SHORT).show();
                     }
@@ -96,6 +97,8 @@ public class Pop extends Activity{
                                     }
                 }
             });
+
+        // sets the size of the window
 
         DisplayMetrics dm = new DisplayMetrics();
 

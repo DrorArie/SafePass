@@ -33,6 +33,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
         editTextPassword = findViewById(R.id.edit_text_password);
         progressbar = findViewById(R.id.progressbar);
 
+        // find if one of them has been clicked
         findViewById(R.id.text_view_register).setOnClickListener(this);
         findViewById(R.id.button_sign_in).setOnClickListener(this);
         findViewById(R.id.text_view_forget_password).setOnClickListener(this);
@@ -41,8 +42,8 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
     private void userLogin() {
 
 
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim(); // remove the spaces from the email
+        String password = editTextPassword.getText().toString().trim();// remove the spaces from the password
 
         if(email.isEmpty()){
             editTextEmail.setError("Email is required");
@@ -108,30 +109,20 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
         });
     }
 
-    /*protected void onStart() {
-        super.onStart();
-
-        if(mAuth.getCurrentUser() != null)
-        {
-            finish();
-            startActivity(new Intent(this, MainActivity.class));
-        }
-    }*/
-/* dick */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case  R.id.text_view_register:
+            case  R.id.text_view_register:  // if the user wanna register
                 finish();
                 startActivity(new Intent(this, SignUpActivity.class ));
                 break;
 
-            case R.id.text_view_forget_password:
+            case R.id.text_view_forget_password: // if the user forgot his password
                 finish();
                 startActivity(new Intent(this, ForgetPassword.class ));
                 break;
 
-            case R.id.button_sign_in:
+            case R.id.button_sign_in: // if the user wanna sign in
                 userLogin();
                 break;
 

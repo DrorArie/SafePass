@@ -36,15 +36,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         mAuth = FirebaseAuth.getInstance(); // getting the current user, in this case null
 
+        // find if one of them has been clicked
         findViewById(R.id.button_sign_up).setOnClickListener(this);
         findViewById(R.id.text_view_login).setOnClickListener(this);
 
     }
 
     private void registerUser(){
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
-        String confimedPassword = editTextConfirmedPassword.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim(); // remove the spaces
+        String password = editTextPassword.getText().toString().trim(); // remove the spaces
+        String confirmedPassword = editTextConfirmedPassword.getText().toString().trim(); // remove the spaces
 
         if(email.isEmpty()){
             editTextEmail.setError("Email is required");
@@ -61,12 +62,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             editTextPassword.requestFocus();
             return;
         }
-        if(confimedPassword.isEmpty()){
+        if(confirmedPassword.isEmpty()){
             editTextConfirmedPassword.setError("Please confirm your password");
             editTextConfirmedPassword.requestFocus();
             return;
         }
-        if (!(confimedPassword.equals(password))){
+        if (!(confirmedPassword.equals(password))){
             editTextConfirmedPassword.setError("Invalid passwords");
             editTextConfirmedPassword.requestFocus();
             return;
@@ -121,18 +122,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.button_sign_up:
+            case R.id.button_sign_up: // if the user signed up
                 registerUser();
                 break;
 
-            case R.id.text_view_login:
+            case R.id.text_view_login: // if the user has backed to the login screen
                 finish();
                 startActivity(new Intent(this, SignInActivity.class));
-                break;
-
-            case R.id.text_view_forget_password:
-                finish();
-                startActivity(new Intent(this, ForgetPassword.class));
                 break;
 
         }

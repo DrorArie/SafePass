@@ -33,6 +33,7 @@ public class ForgetPassword extends AppCompatActivity {
         progressbar = findViewById(R.id.progressbar);
         back_label = findViewById(R.id.text_back);
 
+        // if ask for being back to the login screen
         back_label.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +42,7 @@ public class ForgetPassword extends AppCompatActivity {
             }
         });
 
-        reset.setOnClickListener(new View.OnClickListener() {
+        reset.setOnClickListener(new View.OnClickListener() { // check validation of email
             @Override
             public void onClick(View v) {
                 String email = editTextEmail.getText().toString().trim();
@@ -59,7 +60,7 @@ public class ForgetPassword extends AppCompatActivity {
                 progressbar.setVisibility(View.VISIBLE);
 
                 FirebaseAuth.getInstance()
-                        .sendPasswordResetEmail(email)
+                        .sendPasswordResetEmail(email) // send email to the user
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
