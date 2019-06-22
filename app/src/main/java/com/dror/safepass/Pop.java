@@ -68,34 +68,28 @@ public class Pop extends Activity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(view)
+                if (view)
                     finish();
                 else // check for validation
-                    if(title.getText().toString().equals("")){
+                    if (title.getText().toString().equals("")) {
                         Toast.makeText(Pop.this, "Title is required", Toast.LENGTH_SHORT).show();
+                    } else if (userName.getText().toString().equals(""))
+                        Toast.makeText(Pop.this, "User name is required", Toast.LENGTH_SHORT).show();
+                    else if (password.getText().toString().equals(""))
+                        Toast.makeText(Pop.this, "Password is required", Toast.LENGTH_SHORT).show();
+                    else {
+                        fab.setEnabled(false);
+                        if (!MainActivity.isUpdate) {
+                            Toast.makeText(Pop.this, "added!", Toast.LENGTH_SHORT).show();
+                            setData(title.getText().toString(), userName.getText().toString(), password.getText().toString());
+                        } else if (!title.getText().toString().equals("") && !userName.getText().toString().equals("")
+                                && !password.getText().toString().equals("")) {
+                            Toast.makeText(Pop.this, "Updated!", Toast.LENGTH_SHORT).show();
+                            updateData(title.getText().toString(), userName.getText().toString(), password.getText().toString());
+                            MainActivity.isUpdate = !MainActivity.isUpdate;
+                        }
                     }
-                    else
-                        if(userName.getText().toString().equals(""))
-                            Toast.makeText(Pop.this, "User name is required", Toast.LENGTH_SHORT).show();
-                        else
-                            if(password.getText().toString().equals(""))
-                                Toast.makeText(Pop.this, "Password is required", Toast.LENGTH_SHORT).show();
-                            else
-                                if(!MainActivity.isUpdate && !title.getText().toString().equals("") && !userName.getText().toString().equals("")
-                                        && !password.getText().toString().equals(""))
-                                {
-                                    Toast.makeText(Pop.this, "added!", Toast.LENGTH_SHORT).show();
-                                    setData(title.getText().toString(),userName.getText().toString(),password.getText().toString());
-                                }
-                                else
-                                    if (!title.getText().toString().equals("") && !userName.getText().toString().equals("")
-                                            && !password.getText().toString().equals(""))
-                                    {
-                                        Toast.makeText(Pop.this, "Updated!", Toast.LENGTH_SHORT).show();
-                                        updateData(title.getText().toString(),userName.getText().toString(), password.getText().toString());
-                                        MainActivity.isUpdate = !MainActivity.isUpdate;
-                                    }
-                }
+            }
             });
 
         // sets the size of the window
