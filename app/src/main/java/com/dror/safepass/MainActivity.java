@@ -275,7 +275,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {  // creates the options menu on the top right corner
 
